@@ -21,6 +21,8 @@ Créer un fichier secrets.h dans le dossier include avec les informations suivan
 
 */
 
+extern uint8_t emp;
+
 // ===== Paramètres MQTT =====
 extern const char *mqtt_server;
 extern const int mqtt_port;

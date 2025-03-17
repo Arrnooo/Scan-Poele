@@ -10,6 +10,7 @@ SoftwareSerial StoveSerial(RX_PIN, TX_PIN); // Utilise les pins définis dans co
 char stoveRxData[2];
 uint8_t loc = 0;
 uint8_t locCheksum = 0;
+extern  uint8_t emp;
 
 void setup_poele()
 {
@@ -40,9 +41,10 @@ void checkStoveReply()
     Serial.printf("Param=%01x value=%01x ", param, val);
 #endif
     char dynamic_topic[50]; // Assurez-vous que la taille est suffisante pour contenir le topic
-    snprintf(dynamic_topic, sizeof(dynamic_topic), "%s/%d", in_topic, loc);
-    char message[2] = {stoveRxData[1], '\0'}; // Convertit le char en une chaîne de caractères
-    client.publish(dynamic_topic, message, false);
+    snprintf(dynamic_topic, sizeof(dynamic_topic), "%s/%d", mqtt_topic, emp);
+    char message[5]; // Augmentez la taille pour inclure "0x", la valeur hexadécimale (2 caractères), et le caractère nul
+    snprintf(message, sizeof(message), "0x%02x", stoveRxData[1]); // Formate le message avec "0x" suivi de la valeur hexadécimale
+    client.publish(dynamic_topic, message, true);
   }
 }
 

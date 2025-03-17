@@ -4,9 +4,6 @@
 #include "ota.h"
 #include "config.h"
 
-uint8_t emp = 0;
-
-
 void setup()
 {
 #ifdef DEBUG
@@ -32,4 +29,5 @@ void loop()
   {
     emp++;
   }
+  //delay(delayPublish);
 }
